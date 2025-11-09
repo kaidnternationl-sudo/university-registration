@@ -37,18 +37,13 @@
             color: #333;
             font-weight: bold;
         }
-        input {
+        input, textarea {
             width: 100%;
             padding: 12px;
             border: 2px solid #ddd;
             border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-        input:focus {
-            outline: none;
-            border-color: #4CAF50;
         }
         .submit-btn {
             background: linear-gradient(135deg, #4CAF50, #45a049);
@@ -60,19 +55,7 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.2s;
-        }
-        .submit-btn:hover {
-            transform: translateY(-2px);
-        }
-        .warning {
-            text-align: center;
-            color: #ff4d4d;
-            font-weight: bold;
-            margin: 20px 0;
-            padding: 10px;
-            background: #ffe6e6;
-            border-radius: 5px;
+            margin-top: 10px;
         }
         .success {
             background: #d4edda;
@@ -83,137 +66,110 @@
             text-align: center;
             display: none;
         }
+        .warning {
+            text-align: center;
+            color: #ff4d4d;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            background: #ffe6e6;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>🎓 البيانات المطلوبة في التقديم</h2>
         
-        <form id="universityForm">
+        <!-- إرسال مباشر للإيميل -->
+        <form action="mailto:Kaidnternationl@gmail.com" method="post" enctype="text/plain">
+            <input type="hidden" name="subject" value="🎓 تسجيل جامعي جديد - نظام القبول">
+            
             <div class="form-group">
-                <label for="name_ar">الاسم الكامل (عربي):</label>
-                <input type="text" id="name_ar" name="name_ar" required>
+                <label>الاسم الكامل (عربي):</label>
+                <input type="text" name="الاسم العربي" required placeholder="أدخل الاسم الكامل بالعربية">
             </div>
 
             <div class="form-group">
-                <label for="name_en">الاسم الكامل (إنجليزي):</label>
-                <input type="text" id="name_en" name="name_en" required>
+                <label>الاسم الكامل (إنجليزي):</label>
+                <input type="text" name="الاسم الإنجليزي" required placeholder="أدخل الاسم الكامل بالإنجليزية">
             </div>
 
             <div class="form-group">
-                <label for="id_number">رقم الهوية:</label>
-                <input type="text" id="id_number" name="id_number" required>
+                <label>رقم الهوية:</label>
+                <input type="text" name="رقم الهوية" required placeholder="أدخل رقم الهوية الوطنية">
             </div>
 
             <div class="form-group">
-                <label for="phone">رقم الهاتف:</label>
-                <input type="tel" id="phone" name="phone" required>
+                <label>رقم الهاتف:</label>
+                <input type="tel" name="رقم الهاتف" required placeholder="05XXXXXXXX">
             </div>
 
             <div class="form-group">
-                <label for="parent_num">رقم ولي الأمر:</label>
-                <input type="text" id="parent_num" name="parent_num">
+                <label>رقم ولي الأمر:</label>
+                <input type="text" name="رقم ولي الأمر" placeholder="رقم هاتف ولي الأمر">
             </div>
 
             <div class="form-group">
-                <label for="current_region">المنطقة الحالية:</label>
-                <input type="text" id="current_region" name="current_region">
+                <label>المنطقة الحالية:</label>
+                <input type="text" name="المنطقة الحالية" placeholder="المدينة والحي">
             </div>
 
             <div class="form-group">
-                <label for="cert_type">صورة من الشهادة:</label>
-                <input type="text" id="cert_type" name="cert_type">
+                <label>نوع الشهادة:</label>
+                <input type="text" name="نوع الشهادة" placeholder="مثال: ثانوية عامة - بكالوريوس">
             </div>
             
             <div class="form-group">
-                <label for="academic_num">الأكاديمي:</label>
-                <input type="text" id="academic_num" name="academic_num">
+                <label>الرقم الأكاديمي:</label>
+                <input type="text" name="الرقم الأكاديمي" placeholder="الرقم الجامعي أو الأكاديمي">
             </div>
 
             <div class="form-group">
-                <label for="major_name">اسم التخصص المطلوب:</label>
-                <input type="text" id="major_name" name="major_name">
+                <label>التخصص المطلوب:</label>
+                <input type="text" name="التخصص المطلوب" placeholder="التخصص المراد الالتحاق به">
             </div>
             
             <div class="form-group">
-                <label for="gpa">المعدل التراكمي:</label>
-                <input type="text" id="gpa" name="gpa">
+                <label>المعدل التراكمي:</label>
+                <input type="text" name="المعدل التراكمي" placeholder="مثال: 4.5 من 5">
             </div>
 
             <div class="form-group">
-                <label for="grades">الدرجة: القدرات/والتحصيلي:</label>
-                <input type="text" id="grades" name="grades">
+                <label>الدرجات (القدرات/التحصيلي):</label>
+                <input type="text" name="الدرجات" placeholder="درجة القدرات والتحصيلي">
             </div>
 
             <div class="form-group">
-                <label for="email">البريد الإلكتروني (الايميل):</label>
-                <input type="email" id="email" name="email" required>
+                <label>البريد الإلكتروني للمتقدم:</label>
+                <input type="email" name="بريد المتقدم" required placeholder="example@gmail.com">
             </div>
 
             <div class="warning">
                 ⚠️ يرجى التأكد من صحة البيانات قبل إرسالها
             </div>
 
-            <button type="submit" class="submit-btn">📤 إرسال البيانات</button>
+            <button type="submit" class="submit-btn">📤 إرسال البيانات إلى القبول الجامعي</button>
         </form>
 
         <div id="successMessage" class="success">
-            <strong>✅ تم إرسال البيانات بنجاح!</strong>
+            <strong>✅ تم فتح بريدك الإلكتروني!</strong>
             <br>
-            <span style="font-size: 14px;">البيانات وصلت لحسابك في التليجرام</span>
+            <span style="font-size: 14px;">سيتم فتح تطبيق البريد - اضغط "إرسال" لإكتمام العملية</span>
         </div>
     </div>
 
     <script>
-        document.getElementById('universityForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // جمع البيانات من النموذج
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            
-            // بناء الرسالة
-            const message = `
-🎓 **تسجيل جامعي جديد - بيانات كاملة**
-
-👤 **الاسم العربي:** ${data.name_ar}
-🔤 **الاسم الإنجليزي:** ${data.name_en}
-🆔 **رقم الهوية:** ${data.id_number}
-📞 **رقم الهاتف:** ${data.phone}
-👨‍👩‍👧 **رقم ولي الأمر:** ${data.parent_num || 'غير مدخل'}
-📍 **المنطقة الحالية:** ${data.current_region || 'غير مدخل'}
-📄 **نوع الشهادة:** ${data.cert_type || 'غير مدخل'}
-🎓 **الرقم الأكاديمي:** ${data.academic_num || 'غير مدخل'}
-📚 **التخصص المطلوب:** ${data.major_name || 'غير مدخل'}
-⭐ **المعدل التراكمي:** ${data.gpa || 'غير مدخل'}
-📊 **الدرجات:** ${data.grades || 'غير مدخل'}
-📧 **البريد الإلكتروني:** ${data.email}
-
-🕒 **وقت التسجيل:** ${new Date().toLocaleString('ar-SA')}
-🌐 **المصدر:** صفحة التسجيل الجامعي
-            `;
-            
-            // ✅ الإرسال المباشر لحسابك الشخصي
-            const botToken = '8457845780:AAEGCZOgCqnM3HG2lr0fRt_WCdrC5Z-A26I';
-            const yourPersonalId = '7003054961'; // رقمك الشخصي
-            
-            // استخدام طريقة تعمل على GitHub Pages
-            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${yourPersonalId}&text=${encodeURIComponent(message)}`;
-            
-            // إنشاء صورة خفية لإرسال الطلب
-            const img = new Image();
-            img.src = telegramUrl;
-            
-            // إظهار رسالة النجاح
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // إعادة تعيين النموذج بعد 3 ثواني
+        document.querySelector('form').addEventListener('submit', function(e) {
+            // إظهار رسالة توجيهية
             setTimeout(() => {
-                this.reset();
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
+                document.getElementById('successMessage').style.display = 'block';
+            }, 500);
             
-            console.log('تم إرسال البيانات إلى حسابك في التليجرام');
+            // إعادة إخفاء الرسالة بعد 10 ثواني
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 10000);
         });
     </script>
 </body>
