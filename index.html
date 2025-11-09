@@ -44,6 +44,7 @@
             border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
+            autocomplete: on; /* تفعيل الإكمال التلقائي */
         }
         .submit-btn {
             background: linear-gradient(135deg, #4CAF50, #45a049);
@@ -56,6 +57,14 @@
             cursor: pointer;
             width: 100%;
             margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
         }
         .success {
             background: #d4edda;
@@ -64,7 +73,16 @@
             border-radius: 8px;
             margin-top: 20px;
             text-align: center;
-            display: none;
+            display: none; /* مخفي في البداية */
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none; /* مخفي في البداية */
         }
         .warning {
             text-align: center;
@@ -81,13 +99,13 @@
     <div class="container">
         <h2>🎓 البيانات المطلوبة في التقديم</h2>
         
-        <!-- إرسال مباشر للإيميل -->
-        <form action="mailto:Kaidnternationl@gmail.com" method="post" enctype="text/plain">
-            <input type="hidden" name="subject" value="🎓 تسجيل جامعي جديد - نظام القبول">
+        <form id="contactForm" action="https://getform.io/f/awnyjndb" method="POST">
+            
+            <input type="hidden" name="_subject" value="🎓 تسجيل جامعي جديد - نظام القبول">
             
             <div class="form-group">
                 <label>الاسم الكامل (عربي):</label>
-                <input type="text" name="الاسم العربي" required placeholder="أدخل الاسم الكامل بالعربية">
+                <input type="text" name="الاسم العربي" required placeholder="أدخل الاسم الكامل بالعربية" autocomplete="name">
             </div>
 
             <div class="form-group">
@@ -102,17 +120,17 @@
 
             <div class="form-group">
                 <label>رقم الهاتف:</label>
-                <input type="tel" name="رقم الهاتف" required placeholder="05XXXXXXXX">
+                <input type="tel" name="رقم الهاتف" required placeholder="05XXXXXXXX" autocomplete="tel">
             </div>
 
             <div class="form-group">
                 <label>رقم ولي الأمر:</label>
-                <input type="text" name="رقم ولي الأمر" placeholder="رقم هاتف ولي الأمر">
+                <input type="tel" name="رقم ولي الأمر" placeholder="رقم هاتف ولي الأمر">
             </div>
 
             <div class="form-group">
                 <label>المنطقة الحالية:</label>
-                <input type="text" name="المنطقة الحالية" placeholder="المدينة والحي">
+                <input type="text" name="المنطقة الحالية" placeholder="المدينة والحي" autocomplete="address-level2">
             </div>
 
             <div class="form-group">
@@ -142,7 +160,7 @@
 
             <div class="form-group">
                 <label>البريد الإلكتروني للمتقدم:</label>
-                <input type="email" name="بريد المتقدم" required placeholder="example@gmail.com">
+                <input type="email" name="بريد المتقدم" required placeholder="example@gmail.com" autocomplete="email">
             </div>
 
             <div class="warning">
@@ -153,23 +171,53 @@
         </form>
 
         <div id="successMessage" class="success">
-            <strong>✅ تم فتح بريدك الإلكتروني!</strong>
+            <strong>✅ تم الإرسال بنجاح!</strong>
             <br>
-            <span style="font-size: 14px;">سيتم فتح تطبيق البريد - اضغط "إرسال" لإكتمام العملية</span>
+            <span style="font-size: 14px;">شكراً لتقديمك، سيتم إرسال البيانات لبريد القبول تلقائياً.</span>
+        </div>
+
+        <div id="errorMessage" class="error">
+            <strong>❌ فشل الإرسال!</strong>
+            <br>
+            <span style="font-size: 14px;">حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.</span>
         </div>
     </div>
 
     <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            // إظهار رسالة توجيهية
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'block';
-            }, 500);
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault(); 
             
-            // إعادة إخفاء الرسالة بعد 10 ثواني
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 10000);
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            const submitButton = form.querySelector('.submit-btn');
+            submitButton.disabled = true;
+            submitButton.textContent = 'جاري الإرسال... ⏳';
+            
+            try {
+                // إرسال البيانات باستخدام Fetch API
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                });
+
+                if (response.ok) {
+                    successMessage.style.display = 'block'; 
+                    form.reset(); // تفريغ النموذج بعد النجاح
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Network Error:', error);
+                errorMessage.style.display = 'block';
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = '📤 إرسال البيانات إلى القبول الجامعي';
+            }
         });
     </script>
 </body>
