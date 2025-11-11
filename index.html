@@ -55,7 +55,7 @@
             autocomplete: on; /* تفعيل الإكمال التلقائي */
         }
         input[type="file"] {
-            padding-right: 0; /* لإزالة البادينج الإضافي الذي قد يؤثر على حقل الملفات */
+            padding-right: 0; 
         }
         .submit-btn {
             background: linear-gradient(135deg, #4CAF50, #45a049);
@@ -84,7 +84,7 @@
             border-radius: 8px;
             margin-top: 20px;
             text-align: center;
-            display: none; /* مخفي في البداية */
+            display: none; 
         }
         .error {
             background: #f8d7da;
@@ -93,7 +93,7 @@
             border-radius: 8px;
             margin-top: 20px;
             text-align: center;
-            display: none; /* مخفي في البداية */
+            display: none; 
         }
         .warning {
             text-align: center;
@@ -111,7 +111,7 @@
             border-top: 1px solid #ddd;
         }
         .contact-info a {
-            color: #25d366; /* لون الواتساب الأخضر */
+            color: #25d366; 
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
@@ -127,7 +127,6 @@
             border-radius: 8px; 
             margin-bottom: 20px; 
             border: 1px solid #4CAF50;
-            text-align: right;
         }
     </style>
 </head>
@@ -201,15 +200,20 @@
 
             <h3>تسديد رسوم التسجيل (المطلوب: 500 ريال)</h3>
 
-            <div class="payment-details">
+            <div class="payment-details" style="text-align: center;"> 
                 <p style="margin: 0; font-weight: bold; color: #155724;">طريقة الدفع (تحويل بنكي):</p>
-                <p style="margin: 5px 0;">🏦 **البنك:** <span style="font-weight: normal;">الإنماء السعودي</span></p>
-                <p style="margin: 5px 0;">👤 **اسم المستفيد:** <span style="font-weight: normal;">الشؤون المالية</span></p>
-                <p style="margin: 5px 0;">💳 **رقم الآيبان (IBAN):** <span style="font-weight: normal; direction: ltr; display: inline-block;">SA6305000068206733958000</span></p>
+                
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SA6305000068206733958000" alt="رمز QR لدفع الرسوم" style="width: 150px; height: 150px; margin: 10px auto; border: 2px solid #ddd;">
+                
+                <p style="margin: 5px 0; font-size: 14px; font-weight: bold;">(امسح الرمز أعلاه لتحويل المبلغ عبر تطبيق البنك)</p>
+                
+                <p style="margin: 5px 0; text-align: right;">🏦 **البنك:** <span style="font-weight: normal;">الإنماء السعودي</span></p>
+                <p style="margin: 5px 0; text-align: right;">👤 **اسم المستفيد:** <span style="font-weight: normal;">الشؤون المالية</span></p>
+                
                 <hr style="border-top: 1px dashed #4CAF50;">
                 <p style="color: #ff4d4d; font-weight: bold; margin: 5px 0;">⚠️ يرجى إتمام التحويل من تطبيق البنك **قبل** إرسال النموذج.</p>
             </div>
-
+            
             <div class="form-group">
                 <label>إدخال المبلغ المدفوع:</label>
                 <input type="number" name="المبلغ المدفوع" required placeholder="500" value="500" min="500">
@@ -240,7 +244,7 @@
         </div>
         
         <div class="contact-info">
-            <p style="margin: 0; font-weight: bold; color: #555;">للتواصل بالعمادة (واتساب):</p>
+            <p style="margin: 0; font-weight: bold; color: #555;">للتواصل بالشؤون المالية (واتساب):</p>
             <a href="https://wa.me/966580422371" target="_blank" rel="noopener noreferrer">
                 <span class="whatsapp-icon">📞</span> +966580422371
             </a>
