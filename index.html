@@ -1,3 +1,29 @@
+        <div class="contact-info">
+            <p style="margin: 0; font-weight: bold; color: #555;">للتواصل بالشؤون المالية (واتساب):</p>
+            <a href="https://wa.me/966580422371" target="_blank" rel="noopener noreferrer">
+                <span class="whatsapp-icon">📞</span> +966580422371
+            </a>
+        </div>
+        ```
+
+ليصبح هكذا:
+
+```html
+        <div class="contact-info">
+            <p style="margin: 0; font-weight: bold; color: #555;">للتواصل بالشؤون المالية:</p>
+            <a href="https://wa.me/966580422371" target="_blank" rel="noopener noreferrer" style="font-size: 18px;">
+                <span class="whatsapp-icon">📞</span> اضغط هنا لبدء محادثة واتساب
+            </a>
+        </div>
+        ```
+
+---
+
+## 💻 الكود النهائي الكامل والمعدَّل
+
+إليك الكود مع تعديل الواتساب (وإزالة الآيبان النصي ورمز QR ما زال موجوداً):
+
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -119,7 +145,8 @@
         }
         .whatsapp-icon {
             font-size: 24px;
-            margin-left: 5px;
+            margin-right: 5px;
+            vertical-align: middle;
         }
         .payment-details {
             background: #e6ffe6; 
@@ -244,9 +271,9 @@
         </div>
         
         <div class="contact-info">
-            <p style="margin: 0; font-weight: bold; color: #555;">للتواصل بالشؤون المالية (واتساب):</p>
-            <a href="https://wa.me/966580422371" target="_blank" rel="noopener noreferrer">
-                <span class="whatsapp-icon">📞</span> +966580422371
+            <p style="margin: 0; font-weight: bold; color: #555;">للتواصل بالشؤون المالية:</p>
+            <a href="https://wa.me/966580422371" target="_blank" rel="noopener noreferrer" style="font-size: 18px;">
+                <span class="whatsapp-icon">📞</span> اضغط هنا لبدء محادثة واتساب
             </a>
         </div>
         </div>
