@@ -45,7 +45,7 @@
             color: #333;
             font-weight: bold;
         }
-        input:not([type="file"]), textarea, select { /* إضافة select */
+        input:not([type="file"]), textarea {
             width: 100%;
             padding: 12px;
             border: 2px solid #ddd;
@@ -146,58 +146,201 @@
              margin: 5px 0;
              font-size: 15px;
         }
+        /* إضافة أنماط قسم التخصصات */
+        .specialization-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .specialization-title {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .specialization-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .specialization-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        .specialization-list li:last-child {
+            border-bottom: none;
+        }
+        .specialization-toggle {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: background 0.3s;
+        }
+        .specialization-toggle:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+        .specializations-container {
+            display: none;
+        }
+        .specializations-container.active {
+            display: block;
+        }
+        .specialization-group {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0f8f0;
+        }
+        .specialization-group h4, .specialization-group h5 {
+            color: #2c5e2c;
+            margin-bottom: 10px;
+        }
+        .specialization-item {
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        .specialization-item:hover {
+            background-color: #e6ffe6;
+            border-color: #4CAF50;
+        }
+        .specialization-item.selected {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        .selected-specialization {
+            background-color: #e6ffe6;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+        .selected-specialization span {
+            font-weight: bold;
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>🎓 البيانات المطلوبة في التقديم الترم الثاني كلية التقنية</h2>
         
+        <!-- قسم اختيار التخصصات -->
+        <div class="specialization-section">
+            <button type="button" class="specialization-toggle" id="specializationToggle">
+                عرض التخصصات والبرامج المتاحة
+            </button>
+            
+            <div class="specializations-container" id="specializationsContainer">
+                <h3 class="specialization-title">التخصصات والبرامج المتاحة</h3>
+                
+                <div class="specialization-group">
+                    <h4>التقنية الإدارية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="دبلوم في الإدارة المكتبية">- دبلوم في الإدارة المكتبية</li>
+                        <li class="specialization-item" data-specialization="دبلوم في المحاسبة">- دبلوم في المحاسبة</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>الحاسب وتقنية المعلومات</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="دعم فني للحاسب (دبلوم)">- دعم فني للحاسب (دبلوم)</li>
+                        <li class="specialization-item" data-specialization="شبكات الحاسب (دبلوم)">- شبكات الحاسب (دبلوم)</li>
+                        <li class="specialization-item" data-specialization="برمجة وتطوير الويب (دبلوم)">- برمجة وتطوير الويب (دبلوم)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>التقنية الكهربائية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="الهندسة / القوى الكهربائية (بكالوريوس تطبيقي)">- الهندسة / القوى الكهربائية (بكالوريوس تطبيقي)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>التقنية الإلكترونية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="الإلكترونيات الصناعية وأنظمة التحكم (دبلوم)">- الإلكترونيات الصناعية وأنظمة التحكم (دبلوم)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>التقنية المدنية والمعمارية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="تقنية المساحة (دبلوم/تخصص ضمن المدنية والمعمارية)">- تقنية المساحة (دبلوم/تخصص ضمن المدنية والمعمارية)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>التقنية الميكانيكية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="تقنية التصنيع (دبلوم)">- تقنية التصنيع (دبلوم)</li>
+                        <li class="specialization-item" data-specialization="تقنية المحركات والمركبات (دبلوم)">- تقنية المحركات والمركبات (دبلوم)</li>
+                        <li class="specialization-item" data-specialization="تقنية التبريد وتكييف الهواء (دبلوم)">- تقنية التبريد وتكييف الهواء (دبلوم)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>البنات — التخصصات/البرامج المتاحة في الكلية التقنية للبنات</h4>
+                    
+                    <h5>تقنية السياحة والضيافة</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="برنامج إدارة الفعاليات">- برنامج إدارة الفعاليات</li>
+                    </ul>
+                    
+                    <h5>الحاسب الآلي</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="تصميم وتحليل النظم">- تصميم وتحليل النظم</li>
+                        <li class="specialization-item" data-specialization="برمجة">- برمجة</li>
+                        <li class="specialization-item" data-specialization="تطوير الويب">- تطوير الويب</li>
+                        <li class="specialization-item" data-specialization="قواعد البيانات">- قواعد البيانات</li>
+                        <li class="specialization-item" data-specialization="شبكات">- شبكات</li>
+                    </ul>
+                    
+                    <h5>التقنية المالية والإدارية</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="الأعمال المكتبية">- الأعمال المكتبية</li>
+                        <li class="specialization-item" data-specialization="التسويق والابتكار">- التسويق والابتكار</li>
+                    </ul>
+                    
+                    <h5>التزيين والتجميل</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="العناية بالبشرة">- العناية بالبشرة</li>
+                        <li class="specialization-item" data-specialization="العناية بالشعر">- العناية بالشعر</li>
+                    </ul>
+                    
+                    <h5>تصنيع وتصميم الأزياء</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="إنتاج وتصنيع أزياء">- إنتاج وتصنيع أزياء</li>
+                        <li class="specialization-item" data-specialization="تصميم أزياء">- تصميم أزياء</li>
+                        <li class="specialization-item" data-specialization="موضة">- موضة</li>
+                    </ul>
+                </div>
+                
+                <div class="selected-specialization" id="selectedSpecialization">
+                    تم اختيار التخصص: <span id="selectedSpecializationText"></span>
+                </div>
+            </div>
+        </div>
+        
         <form id="contactForm" action="https://getform.io/f/awnyjndb" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="_subject" value="🎓 تسجيل جامعي جديد - نظام القبول">
-            
-            <div class="form-group">
-                <label for="major-select">التخصصات المتاحة (يرجى الاختيار):</label>
-                <select name="التخصص المطلوب" id="major-select" required>
-                    <option value="" disabled selected>--- اختر تخصصاً من القائمة ---</option>
-                    
-                    <optgroup label="⚙️ التخصصات الهندسية والكهربائية">
-                        <option value="التقنية الكهربائية">التقنية الكهربائية</option>
-                        <option value="التقنية الميكانيكية">التقنية الميكانيكية</option>
-                        <option value="صيانة الطائرات">صيانة الطائرات</option>
-                        <option value="تقنية التبريد والتكييف">تقنية التبريد والتكييف</option>
-                        <option value="السيارات">السيارات</option>
-                        <option value="الهندسة المدنية">الهندسة المدنية</option>
-                    </optgroup>
-                    
-                    <optgroup label="💼 التخصصات الإدارية والتجارية">
-                        <option value="إدارة الأعمال">إدارة الأعمال</option>
-                        <option value="المحاسبة">المحاسبة</option>
-                        <option value="التسويق">التسويق</option>
-                        <option value="السكرتارية الطبية">السكرتارية الطبية</option>
-                        <option value="إدارة المكاتب">إدارة المكاتب</option>
-                        <option value="التجارة الإلكترونية">التجارة الإلكترونية</option>
-                    </optgroup>
-
-                    <optgroup label="💻 تخصصات الحاسب وتقنية المعلومات">
-                        <option value="تقنية المعلومات">تقنية المعلومات</option>
-                        <option value="أمن المعلومات السيبراني">أمن المعلومات السيبراني</option>
-                        <option value="البرمجة وقواعد البيانات">البرمجة وقواعد البيانات</option>
-                        <option value="الذكاء الاصطناعي">الذكاء الاصطناعي</option>
-                        <option value="تطوير الألعاب">تطوير الألعاب</option>
-                        <option value="الجرافيكس والوسائط المتعددة">الجرافيكس والوسائط المتعددة</option>
-                    </optgroup>
-
-                    <optgroup label="🏥 تخصصات صحية (أساسي)">
-                        <option value="التقنية السريرية">التقنية السريرية</option>
-                        <option value="السجلات الطبية">السجلات الطبية</option>
-                        <option value="الصيدلة">الصيدلة</option>
-                        <option value="طب الأسنان">طب الأسنان</option>
-                        <option value="التمريض">التمريض</option>
-                    </optgroup>
-                    
-                </select>
-            </div>
             
             <div class="form-group">
                 <label>الاسم الكامل (عربي):</label>
@@ -237,6 +380,11 @@
             <div class="form-group">
                 <label>الرقم الأكاديمي:</label>
                 <input type="text" name="الرقم الأكاديمي" placeholder="الرقم الجامعي أو الأكاديمي">
+            </div>
+
+            <div class="form-group">
+                <label>التخصص المطلوب:</label>
+                <input type="text" name="التخصص المطلوب" id="specializationInput" required placeholder="التخصص المراد الالتحاق به">
             </div>
             
             <div class="form-group">
@@ -300,12 +448,52 @@
                 <span class="whatsapp-icon">💬</span> **للتواصل اضغط هنا**
             </a>
         </div>
-        </div>
+    </div>
 
     <script>
         const form = document.getElementById('contactForm');
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
+        const specializationInput = document.getElementById('specializationInput');
+        const selectedSpecialization = document.getElementById('selectedSpecialization');
+        const selectedSpecializationText = document.getElementById('selectedSpecializationText');
+        
+        // إضافة وظيفة عرض/إخفاء التخصصات
+        const specializationToggle = document.getElementById('specializationToggle');
+        const specializationsContainer = document.getElementById('specializationsContainer');
+        
+        specializationToggle.addEventListener('click', function() {
+            specializationsContainer.classList.toggle('active');
+            if (specializationsContainer.classList.contains('active')) {
+                specializationToggle.textContent = 'إخفاء التخصصات والبرامج المتاحة';
+            } else {
+                specializationToggle.textContent = 'عرض التخصصات والبرامج المتاحة';
+            }
+        });
+
+        // إضافة وظيفة اختيار التخصص بالنقر
+        const specializationItems = document.querySelectorAll('.specialization-item');
+        
+        specializationItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // إزالة التحديد من جميع العناصر
+                specializationItems.forEach(i => i.classList.remove('selected'));
+                
+                // إضافة التحديد للعنصر المختار
+                this.classList.add('selected');
+                
+                // تعيين التخصص في حقل الإدخال
+                const specialization = this.getAttribute('data-specialization');
+                specializationInput.value = specialization;
+                
+                // عرض التخصص المختار
+                selectedSpecializationText.textContent = specialization;
+                selectedSpecialization.style.display = 'block';
+                
+                // تمرير التركيز إلى حقل الاسم العربي لتسهيل متابعة تعبئة البيانات
+                document.querySelector('input[name="الاسم العربي"]').focus();
+            });
+        });
 
         form.addEventListener("submit", async function (event) {
             event.preventDefault(); 
@@ -326,6 +514,9 @@
                 if (response.ok) {
                     successMessage.style.display = 'block'; 
                     form.reset(); 
+                    // إعادة تعيين التخصص المختار
+                    selectedSpecialization.style.display = 'none';
+                    specializationItems.forEach(i => i.classList.remove('selected'));
                 } else {
                     errorMessage.style.display = 'block';
                 }
@@ -339,4 +530,4 @@
         });
     </script>
 </body>
-</html>
+                    </html>
