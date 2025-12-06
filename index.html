@@ -45,7 +45,20 @@
             color: #333;
             font-weight: bold;
         }
-        input:not([type="file"]), textarea, select {
+        input:not([type="file"]), textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            autocomplete: on;
+        }
+        input[type="file"] {
+            padding-right: 0;
+        }
+        /* إضافة أنماط لحقل الـ Select الجديد */
+        select {
             width: 100%;
             padding: 12px;
             border: 2px solid #ddd;
@@ -53,9 +66,7 @@
             font-size: 16px;
             box-sizing: border-box;
         }
-        input[type="file"] {
-            padding-right: 0;
-        }
+
         .submit-btn {
             background: linear-gradient(135deg, #4CAF50, #45a049);
             color: white;
@@ -145,6 +156,7 @@
              margin: 5px 0;
              font-size: 15px;
         }
+        /* إضافة أنماط قسم التخصصات */
         .specialization-section {
             margin-bottom: 30px;
             padding: 15px;
@@ -167,6 +179,41 @@
             padding: 8px 0;
             border-bottom: 1px dashed #ddd;
         }
+        .specialization-list li:last-child {
+            border-bottom: none;
+        }
+        .specialization-toggle {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: background 0.3s;
+        }
+        .specialization-toggle:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+        .specializations-container {
+            display: none;
+        }
+        .specializations-container.active {
+            display: block;
+        }
+        .specialization-group {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0f8f0;
+        }
+        .specialization-group h4, .specialization-group h5 {
+            color: #2c5e2c;
+            margin-bottom: 10px;
+        }
         .specialization-item {
             padding: 8px 12px;
             margin: 5px 0;
@@ -174,6 +221,10 @@
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid transparent;
+        }
+        .specialization-item:hover {
+            background-color: #e6ffe6;
+            border-color: #4CAF50;
         }
         .specialization-item.selected {
             background-color: #4CAF50;
@@ -188,46 +239,148 @@
             text-align: center;
             display: none;
         }
+        .selected-specialization span {
+            font-weight: bold;
+            color: #4CAF50;
+        }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h2>🎓 البيانات المطلوبة في التقديم الترم الثاني كلية التقنية</h2>
-
+        
+        <div class="specialization-section">
+            <button type="button" class="specialization-toggle" id="specializationToggle">
+                عرض التخصصات والبرامج المتاحة
+            </button>
+            
+            <div class="specializations-container" id="specializationsContainer">
+                <h3 class="specialization-title">التخصصات والبرامج المتاحة</h3>
+                
+                <div class="specialization-group">
+                    <h4>التقنية الإدارية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="دبلوم في الإدارة المكتبية">- دبلوم في الإدارة المكتبية</li>
+                        <li class="specialization-item" data-specialization="دبلوم في المحاسبة">- دبلوم في المحاسبة</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>الحاسب وتقنية المعلومات</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="دعم فني للحاسب (دبلوم)">- دعم فني للحاسب (دبلوم)</li>
+                        <li class="specialization-item" data-specialization="شبكات الحاسب (دبلوم)">- شبكات الحاسب (دبلوم)</li>
+                        <li class="specialization-item" data-specialization="برمجة وتطوير الويب (دبلوم)">- برمجة وتطوير الويب (دبلوم)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>التقنية الكهربائية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="الهندسة / القوى الكهربائية (بكالوريوس تطبيقي)">- الهندسة / القوى الكهربائية (بكالوريوس تطبيقي)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>التقنية الإلكترونية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="الإلكترونيات الصناعية وأنظمة التحكم (دبلوم)">- الإلكترونيات الصناعية وأنظمة التحكم (دبلوم)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>التقنية المدنية والمعمارية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="تقنية المساحة (دبلوم/تخصص ضمن المدنية والمعمارية)">- تقنية المساحة (دبلوم/تخصص ضمن المدنية والمعمارية)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>التقنية الميكانيكية</h4>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="تقنية التصنيع (دبلوم)">- تقنية التصنيع (دبلوم)</li>
+                        <li class="specialization-item" data-specialization="تقنية المحركات والمركبات (دبلوم)">- تقنية المحركات والمركبات (دبلوم)</li>
+                        <li class="specialization-item" data-specialization="تقنية التبريد وتكييف الهواء (دبلوم)">- تقنية التبريد وتكييف الهواء (دبلوم)</li>
+                    </ul>
+                </div>
+                
+                <div class="specialization-group">
+                    <h4>البنات — التخصصات/البرامج المتاحة في الكلية التقنية للبنات</h4>
+                    
+                    <h5>تقنية السياحة والضيافة</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="برنامج إدارة الفعاليات">- برنامج إدارة الفعاليات</li>
+                    </ul>
+                    
+                    <h5>الحاسب الآلي</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="تصميم وتحليل النظم">- تصميم وتحليل النظم</li>
+                        <li class="specialization-item" data-specialization="برمجة">- برمجة</li>
+                        <li class="specialization-item" data-specialization="تطوير الويب">- تطوير الويب</li>
+                        <li class="specialization-item" data-specialization="قواعد البيانات">- قواعد البيانات</li>
+                        <li class="specialization-item" data-specialization="شبكات">- شبكات</li>
+                    </ul>
+                    
+                    <h5>التقنية المالية والإدارية</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="الأعمال المكتبية">- الأعمال المكتبية</li>
+                        <li class="specialization-item" data-specialization="التسويق والابتكار">- التسويق والابتكار</li>
+                    </ul>
+                    
+                    <h5>التزيين والتجميل</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="العناية بالبشرة">- العناية بالبشرة</li>
+                        <li class="specialization-item" data-specialization="العناية بالشعر">- العناية بالشعر</li>
+                    </ul>
+                    
+                    <h5>تصنيع وتصميم الأزياء</h5>
+                    <ul class="specialization-list">
+                        <li class="specialization-item" data-specialization="إنتاج وتصنيع أزياء">- إنتاج وتصنيع أزياء</li>
+                        <li class="specialization-item" data-specialization="تصميم أزياء">- تصميم أزياء</li>
+                        <li class="specialization-item" data-specialization="موضة">- موضة</li>
+                    </ul>
+                </div>
+                
+                <div class="selected-specialization" id="selectedSpecialization">
+                    تم اختيار التخصص: <span id="selectedSpecializationText"></span>
+                </div>
+            </div>
+        </div>
+        
         <form id="contactForm" action="https://getform.io/f/awnyjndb" method="POST" enctype="multipart/form-data">
+            
+            <input type="hidden" name="_subject" value="🎓 تسجيل جامعي جديد - نظام القبول">
             
             <div class="form-group">
                 <label>الاسم الكامل (عربي):</label>
-                <input type="text" name="الاسم العربي" required>
+                <input type="text" name="الاسم العربي" required placeholder="أدخل الاسم الكامل بالعربية" autocomplete="name">
             </div>
 
             <div class="form-group">
                 <label>الاسم الكامل (إنجليزي):</label>
-                <input type="text" name="الاسم الإنجليزي" required>
+                <input type="text" name="الاسم الإنجليزي" required placeholder="أدخل الاسم الكامل بالإنجليزية">
             </div>
 
             <div class="form-group">
                 <label>رقم الهوية:</label>
-                <input type="text" name="رقم الهوية" required>
+                <input type="text" name="رقم الهوية" required placeholder="أدخل رقم الهوية الوطنية">
             </div>
 
             <div class="form-group">
                 <label>رقم الهاتف:</label>
-                <input type="tel" name="رقم الهاتف" required>
+                <input type="tel" name="رقم الهاتف" required placeholder="05XXXXXXXX" autocomplete="tel">
             </div>
 
             <div class="form-group">
                 <label>رقم ولي الأمر:</label>
-                <input type="tel" name="رقم ولي الأمر">
+                <input type="tel" name="رقم ولي الأمر" placeholder="رقم هاتف ولي الأمر">
             </div>
 
             <div class="form-group">
                 <label>المنطقة الحالية:</label>
-                <input type="text" name="المنطقة الحالية">
+                <input type="text" name="المنطقة الحالية" placeholder="المدينة والحي" autocomplete="address-level2">
             </div>
 
-            <!-- 🔥 التعديل الأول: قائمة نوع الشهادة -->
             <div class="form-group">
                 <label>نوع الشهادة:</label>
                 <select name="نوع الشهادة" required>
@@ -237,35 +390,158 @@
                     <option value="بكالوريوس">بكالوريوس</option>
                 </select>
             </div>
-
+            
             <div class="form-group">
                 <label>الرقم الأكاديمي:</label>
-                <input type="text" name="الرقم الأكاديمي">
+                <input type="text" name="الرقم الأكاديمي" placeholder="الرقم الجامعي أو الأكاديمي">
             </div>
 
             <div class="form-group">
                 <label>التخصص المطلوب:</label>
-                <input type="text" name="التخصص المطلوب">
+                <input type="text" name="التخصص المطلوب" id="specializationInput" required placeholder="التخصص المراد الالتحاق به">
             </div>
-
-            <!-- 🔥 التعديل الثاني: Placeholder جديد فقط -->
+            
             <div class="form-group">
                 <label>المعدل التراكمي:</label>
-                <input type="text" name="المعدل التراكمي" placeholder="اكتب معدلك هنا فقط">
+                <input type="text" name="المعدل التراكمي" placeholder="مثال: 95% أو 4.50 من 5.00">
             </div>
 
             <div class="form-group">
                 <label>الدرجات (القدرات/التحصيلي):</label>
-                <input type="text" name="الدرجات">
+                <input type="text" name="الدرجات" placeholder="درجة القدرات والتحصيلي">
             </div>
 
             <div class="form-group">
                 <label>البريد الإلكتروني للمتقدم:</label>
-                <input type="email" name="بريد المتقدم" required>
+                <input type="email" name="بريد المتقدم" required placeholder="example@gmail.com" autocomplete="email">
             </div>
 
+            <h3>تسديد رسوم التسجيل (المطلوب: 500 ريال)</h3>
+
+            <div class="payment-details">
+                <p style="margin: 0; font-weight: bold; color: #155724;">طريقة الدفع (تحويل بنكي):</p>
+                
+                <div class="qr-code-display">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SA6305000068206733958000" alt="QR Code للدفع">
+                    <p style="color: #555; font-weight: bold; margin: 5px 0;">امسح الرمز أعلاه لتحويل المبلغ عبر تطبيق البنك</p>
+                </div>
+                
+                <div class="bank-details-text">
+                    <p>🏦 **البنك:** <span style="font-weight: normal;">الإنماء السعودي</span></p>
+                    <p>👤 **اسم المستفيد:** <span style="font-weight: normal;">الشؤون المالية</span></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>إدخال المبلغ المدفوع:</label>
+                <input type="number" name="المبلغ المدفوع" required placeholder="500" value="500" min="500">
+            </div>
+
+            <div class="form-group">
+                <label>إرفاق صورة إيصال الدفع (مطلوب لإثبات السداد):</label>
+                <input type="file" name="إيصال الدفع" required accept=".pdf, image/*">
+                <small style="display: block; color: #555; margin-top: 5px;">*يرجى رفع صورة الإيصال البنكي أو ملف PDF</small>
+            </div>
+            
             <button type="submit" class="submit-btn">📤 إرسال البيانات إلى القبول الجامعي</button>
         </form>
+
+        <div id="successMessage" class="success">
+            <strong>✅ تم الإرسال بنجاح!</strong>
+            <br>
+            <span style="font-size: 14px;">شكراً لتقديمك، سيتم إرسال البيانات لبريد القبول تلقائياً.</span>
+        </div>
+
+        <div id="errorMessage" class="error">
+            <strong>❌ فشل الإرسال!</strong>
+            <br>
+            <span style="font-size: 14px;">حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.</span>
+        </div>
+        
+        <div class="contact-info">
+            <a href="https://wa.me/966580422371" target="_blank" rel="noopener noreferrer">
+                <span class="whatsapp-icon">💬</span> **للتواصل اضغط هنا**
+            </a>
+        </div>
     </div>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const specializationInput = document.getElementById('specializationInput');
+        const selectedSpecialization = document.getElementById('selectedSpecialization');
+        const selectedSpecializationText = document.getElementById('selectedSpecializationText');
+        
+        // إضافة وظيفة عرض/إخفاء التخصصات
+        const specializationToggle = document.getElementById('specializationToggle');
+        const specializationsContainer = document.getElementById('specializationsContainer');
+        
+        specializationToggle.addEventListener('click', function() {
+            specializationsContainer.classList.toggle('active');
+            if (specializationsContainer.classList.contains('active')) {
+                specializationToggle.textContent = 'إخفاء التخصصات والبرامج المتاحة';
+            } else {
+                specializationToggle.textContent = 'عرض التخصصات والبرامج المتاحة';
+            }
+        });
+
+        // إضافة وظيفة اختيار التخصص بالنقر
+        const specializationItems = document.querySelectorAll('.specialization-item');
+        
+        specializationItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // إزالة التحديد من جميع العناصر
+                specializationItems.forEach(i => i.classList.remove('selected'));
+                
+                // إضافة التحديد للعنصر المختار
+                this.classList.add('selected');
+                
+                // تعيين التخصص في حقل الإدخال
+                const specialization = this.getAttribute('data-specialization');
+                specializationInput.value = specialization;
+                
+                // عرض التخصص المختار
+                selectedSpecializationText.textContent = specialization;
+                selectedSpecialization.style.display = 'block';
+                
+                // تمرير التركيز إلى حقل الاسم العربي لتسهيل متابعة تعبئة البيانات
+                document.querySelector('input[name="الاسم العربي"]').focus();
+            });
+        });
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault(); 
+            
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            const submitButton = form.querySelector('.submit-btn');
+            submitButton.disabled = true;
+            submitButton.textContent = 'جاري الإرسال... ⏳';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                });
+
+                if (response.ok) {
+                    successMessage.style.display = 'block'; 
+                    form.reset(); 
+                    // إعادة تعيين التخصص المختار
+                    selectedSpecialization.style.display = 'none';
+                    specializationItems.forEach(i => i.classList.remove('selected'));
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Network Error:', error);
+                errorMessage.style.display = 'block';
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = '📤 إرسال البيانات إلى القبول الجامعي';
+            }
+        });
+    </script>
 </body>
-</html>
+                    </html>
