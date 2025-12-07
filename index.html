@@ -34,9 +34,9 @@
             text-align: center;
             font-size: 14px;
             font-weight: normal;
-            margin-top: -20px; /* لتقريبها من العنوان العربي */
+            margin-top: -20px; 
             margin-bottom: 30px;
-            direction: ltr; /* لضمان ظهور النص الإنجليزي من اليسار لليمين */
+            direction: ltr; 
             display: block;
         }
         h3 {
@@ -359,7 +359,7 @@
             </div>
         </div>
         
-        <form id="contactForm" action="https://getform.io/f/awnyjndb" method="POST" enctype="multipart/form-data">
+        <form id="contactForm" action="https://formspree.io/f/xrbnlnee" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="_subject" value="🎓 تسجيل جامعي جديد - نظام القبول">
             
@@ -515,6 +515,11 @@
                 // عرض التخصص المختار
                 selectedSpecializationText.textContent = specialization;
                 selectedSpecialization.style.display = 'block';
+
+                // === التعديل المطلوب: إخفاء القائمة وتحديث زر العرض ===
+                specializationsContainer.classList.remove('active');
+                specializationToggle.textContent = 'عرض التخصصات والبرامج المتاحة';
+                // ===================================================
                 
                 // تمرير التركيز إلى حقل الاسم العربي لتسهيل متابعة تعبئة البيانات
                 document.querySelector('input[name="الاسم العربي"]').focus();
