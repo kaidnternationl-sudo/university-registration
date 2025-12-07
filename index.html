@@ -427,32 +427,6 @@
                 <label>البريد الإلكتروني للمتقدم:</label>
                 <input type="email" name="بريد المتقدم" required placeholder="" autocomplete="email">
             </div>
-
-            <h3>تسديد رسوم التسجيل (المطلوب: 500 ريال)</h3>
-
-            <div class="payment-details">
-                <p style="margin: 0; font-weight: bold; color: #155724;">طريقة الدفع (تحويل بنكي):</p>
-                
-                <div class="qr-code-display">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SA6305000068206733958000" alt="QR Code للدفع">
-                    <p style="color: #555; font-weight: bold; margin: 5px 0;">امسح الرمز أعلاه لتحويل المبلغ عبر تطبيق البنك</p>
-                </div>
-                
-                <div class="bank-details-text">
-                    <p>🏦 **البنك:** <span style="font-weight: normal;">الإنماء السعودي</span></p>
-                    <p>👤 **اسم المستفيد:** <span style="font-weight: normal;">الشؤون المالية</span></p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>إدخال المبلغ المدفوع:</label>
-                <input type="number" name="المبلغ المدفوع" required placeholder="" min="500">
-            </div>
-
-            <div class="form-group">
-                <label>إرفاق صورة إيصال الدفع (مطلوب لإثبات السداد):</label>
-                <input type="file" name="إيصال الدفع" required accept=".pdf, image/*">
-                <small style="display: block; color: #555; margin-top: 5px;">*يرجى رفع صورة الإيصال البنكي أو ملف PDF</small>
-            </div>
             
             <button type="submit" class="submit-btn">📤 إرسال البيانات إلى القبول الجامعي</button>
         </form>
@@ -516,10 +490,9 @@
                 selectedSpecializationText.textContent = specialization;
                 selectedSpecialization.style.display = 'block';
 
-                // === التعديل المطلوب: إخفاء القائمة وتحديث زر العرض ===
+                // إخفاء القائمة وتحديث زر العرض
                 specializationsContainer.classList.remove('active');
                 specializationToggle.textContent = 'عرض التخصصات والبرامج المتاحة';
-                // ===================================================
                 
                 // تمرير التركيز إلى حقل الاسم العربي لتسهيل متابعة تعبئة البيانات
                 document.querySelector('input[name="الاسم العربي"]').focus();
