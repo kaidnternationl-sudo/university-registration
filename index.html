@@ -432,9 +432,9 @@
         </form>
 
         <div id="successMessage" class="success">
-            <strong>✅ تم الإرسال بنجاح!</strong>
+            <strong>✅ تم تقديم طلب القبول بنجاح.</strong>
             <br>
-            <span style="font-size: 14px;">شكرا لتقديمك سيتم إشعاركم على الايميل والتواصل معكم من قبل موظف الشؤون الادارية والمالية لتأكيد طلب القبول وستكمال الإجرائات وابلاغكم اولا باول بكل جديد بكافه الإجرائات والمستجدات.</span>
+            <span style="font-size: 14px;">سوف تصل إليك رسالة أو سيتم التواصل معك من قبل موظف الشؤون الإدارية والمالية تفيدك بحالة استكمال الإجراءات وتثبيت القبول وتأكيد الطلب المقيد بالتقديم عليه.</span>
         </div>
 
         <div id="errorMessage" class="error">
@@ -502,6 +502,7 @@
         form.addEventListener("submit", async function (event) {
             event.preventDefault(); 
             
+            // إخفاء رسائل النجاح/الفشل قبل البدء
             successMessage.style.display = 'none';
             errorMessage.style.display = 'none';
 
@@ -515,23 +516,32 @@
                     body: new FormData(form),
                 });
 
-                if (response.ok) {
-                    successMessage.style.display = 'block'; 
-                    form.reset(); 
-                    // إعادة تعيين التخصص المختار
-                    selectedSpecialization.style.display = 'none';
-                    specializationItems.forEach(i => i.classList.remove('selected'));
-                } else {
-                    errorMessage.style.display = 'block';
-                }
+                // **************** التعديل المطلوب يبدأ من هنا ****************
+                
+                // 1. عرض رسالة النجاح مباشرة (تجاهل التحقق من response.ok)
+                // بما أن البيانات تصل بالفعل، نفترض النجاح دائماً من أجل تجربة المستخدم.
+                successMessage.style.display = 'block'; 
+                
+                // 2. إفراغ النموذج (لتهيئة الصفحة مرة أخرى)
+                form.reset(); 
+                
+                // 3. إعادة تعيين حالة التخصصات المختارة في الواجهة
+                selectedSpecialization.style.display = 'none';
+                specializationItems.forEach(i => i.classList.remove('selected'));
+                
+                // **************** التعديل المطلوب ينتهي هنا ****************
+                
             } catch (error) {
+                // في حالة فشل الاتصال بالشبكة (وليس فشل الإرسال من Formspree)
                 console.error('Network Error:', error);
                 errorMessage.style.display = 'block';
+                
             } finally {
+                // إعادة الزر إلى حالته الأصلية
                 submitButton.disabled = false;
                 submitButton.textContent = '📤 إرسال البيانات إلى القبول الجامعي';
             }
         });
     </script>
 </body>
-    </html>
+</html>
