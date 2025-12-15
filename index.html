@@ -431,16 +431,10 @@
             <button type="submit" class="submit-btn">📤 إرسال البيانات إلى القبول الجامعي</button>
         </form>
 
-        <div id="successMessage" class="success">
-            <strong>✅ تم تقديم طلب القبول بنجاح.</strong>
+        <div id="successMessage" class="success" style="display: none;">
+            <strong>✅ تم تقديم طلب القبول بنجاح</strong>
             <br>
-            <span style="font-size: 14px;">سوف تصل إليك رسالة أو سيتم التواصل معك من قبل موظف الشؤون الإدارية والمالية تفيدك بحالة استكمال الإجراءات وتثبيت القبول وتأكيد الطلب المقيد بالتقديم عليه.</span>
-        </div>
-
-        <div id="errorMessage" class="error">
-            <strong>❌ فشل الإرسال!</strong>
-            <br>
-            <span style="font-size: 14px;">حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.</span>
+            <span style="font-size: 14px;">سوف تصل اليك رساله او سيتم التواصل معك من قبل موظف الشؤون الادارية والماليه تفيدك بحاله استكمال الإجراءات وتثبيت القبول وتأكيد الطلب المقيد بتقديم عليه</span>
         </div>
         
         <div class="contact-info">
@@ -453,7 +447,6 @@
     <script>
         const form = document.getElementById('contactForm');
         const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
         const specializationInput = document.getElementById('specializationInput');
         const selectedSpecialization = document.getElementById('selectedSpecialization');
         const selectedSpecializationText = document.getElementById('selectedSpecializationText');
@@ -502,37 +495,56 @@
         form.addEventListener("submit", async function (event) {
             event.preventDefault(); 
             
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-
             const submitButton = form.querySelector('.submit-btn');
             submitButton.disabled = true;
             submitButton.textContent = 'جاري الإرسال... ⏳';
             
             try {
-                const response = await fetch(form.action, {
+                await fetch(form.action, {
                     method: form.method,
                     body: new FormData(form),
                 });
 
-                // ********* التعديل المطلوب لتجاهل التحقق وعرض النجاح مباشرة *********
-                successMessage.style.display = 'block'; 
-                form.reset(); 
+                // إظهار رسالة الشكر
+                successMessage.style.display = 'block';
+                form.style.display = 'none';
+                document.querySelector('.specialization-section').style.display = 'none';
                 
-                // إعادة تعيين التخصص المختار
-                selectedSpecialization.style.display = 'none';
-                specializationItems.forEach(i => i.classList.remove('selected'));
-                // *************************************************************
+                // إعادة تعيين الصفحة بعد 5 ثواني
+                setTimeout(function() {
+                    form.reset();
+                    form.style.display = 'block';
+                    document.querySelector('.specialization-section').style.display = 'block';
+                    successMessage.style.display = 'none';
+                    selectedSpecialization.style.display = 'none';
+                    specializationItems.forEach(i => i.classList.remove('selected'));
+                    
+                    // إعادة زر الإرسال إلى وضعه الطبيعي
+                    submitButton.disabled = false;
+                    submitButton.textContent = '📤 إرسال البيانات إلى القبول الجامعي';
+                }, 5000);
                 
             } catch (error) {
-                console.error('Network Error:', error);
-                // هذا الجزء سيعرض رسالة خطأ فقط إذا فشل الاتصال بالشبكة تماماً.
-                errorMessage.style.display = 'block';
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = '📤 إرسال البيانات إلى القبول الجامعي';
+                // في حالة حدوث خطأ، إظهار رسالة الشكر أيضاً (كما طلبت)
+                successMessage.style.display = 'block';
+                form.style.display = 'none';
+                document.querySelector('.specialization-section').style.display = 'none';
+                
+                // إعادة تعيين الصفحة بعد 5 ثواني
+                setTimeout(function() {
+                    form.reset();
+                    form.style.display = 'block';
+                    document.querySelector('.specialization-section').style.display = 'block';
+                    successMessage.style.display = 'none';
+                    selectedSpecialization.style.display = 'none';
+                    specializationItems.forEach(i => i.classList.remove('selected'));
+                    
+                    // إعادة زر الإرسال إلى وضعه الطبيعي
+                    submitButton.disabled = false;
+                    submitButton.textContent = '📤 إرسال البيانات إلى القبول الجامعي';
+                }, 5000);
             }
         });
     </script>
 </body>
-</html>
+                </html>
